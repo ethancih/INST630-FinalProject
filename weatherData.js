@@ -2,7 +2,7 @@ export async function weatherDataMain(tempUnit) {
     console.log('Loaded weatherData.js');
   
     const placeOptions = ["Taipei, Taiwan", "11555"]
-    const place = placeOptions[1];
+    const place = placeOptions[0];
 
     const fullJson = await query(place, "today", tempUnit);
 
