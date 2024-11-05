@@ -23,9 +23,22 @@ document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the a
 ///////////////////////////////////////////////////////////////////////////////
 
 // Event listener for the temperature unit change button
-document.getElementById('tempUnitSelect').addEventListener('click', () => {
+document.getElementById("tempUnitSelect").addEventListener("click", () => {
   updateTempUnit(); // Call the function to change the temperature unit
 });
+
+async function loadTempUnitFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const tempUnit = params.get("tempUnit");
+  if (tempUnit) {
+      console.log("Applying temperature unit: " + tempUnit);
+      updateTemperatureDisplay(tempUnit);
+  } else {
+      // If no tempUnit parameter, default to 'celsius'
+      console.log("No temperature unit found in URL, defaulting to celsius.");
+      updateTemperatureDisplay("celsius");
+  }
+}
 
 function getTempUnitFromUrl() {
   const queryString = window.location.search; // Get the query string from the current URL
@@ -69,13 +82,8 @@ async function updateTemperatureDisplay(tempUnit) {
       const weatherData = await import("./weatherData.js");
       weatherData.weatherDataMain(tempUnit);
     }
-}
-
-async function loadTempUnitFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const tempUnit = params.get("tempUnit");
-  if (tempUnit) {
-      console.log("Applying temperature unit: " + tempUnit);
-      updateTemperatureDisplay(tempUnit);
-  }
+    else {
+      console.log("None in tempUnit");
+      weatherData.weatherDataMain("celsius");
+    }
 }
