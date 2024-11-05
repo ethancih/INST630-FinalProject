@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                               
+    <title>Final</title>
+    
+  </head>
+  
+  
+  <body>
+    <header><h1>weather.io</h1></header>
+    <div class="container">
+        <div class="line">
+            <span id="location">Location</span>
+        </div>
+        <div class="line">
+            <span id="currTemp">Current temperature</span>
+        </div>
+        <div class="line">
+            <span id="feelslike">Feelslike</span>
+        </div>
+        <div class="line">
+          <span id="highLow">High and Low</span>
+        </div>
+        
+        <table class="line">
+          <tr>
+            <td>
+              <div class="line">
+                <span></span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="time0">Now</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="time1">19</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="time2">20</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="time3">21</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="time4">22</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="time5">23</span>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="line">
+                <span>Temp</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="temp0">12°</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="temp1">12°</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="temp2">12°</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="temp3">11°</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="temp4">11°</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="temp5">11°</span>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="line">
+                <span>Rain</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="rain0">100%</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="rain1">100%</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="rain2">100%</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="rain3">100%</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="rain4">100%</span>
+              </div>
+            </td>
+            <td>
+              <div class="line">
+                <span id="rain5">100%</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+    </div>
+
+    <button id="tempUnitSelect">Change tempUnit</button>
+    
+    <footer>Powered by <a href="https://www.visualcrossing.com/weather-api" target="_blank">VisualCrossing's weather API</a>.<br>Website made by I-Hsien (Ethan) Chen, 2024.</footer>
+  </body>
+
+    <!-- import GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="main.js"></script>
+  
+</html>
