@@ -6,6 +6,10 @@ export async function weatherDataMain(tempUnit, place) {
 
     const fullJson = await query(tempUnit, place);
 
+    const weatherDetermine = await import("./weatherDetermine.js");
+    let weather = document.getElementById("weather");
+    weather.innerHTML = weatherDetermine.weatherDetermine(fullJson);
+
     let location = document.getElementById("location");
     location.innerHTML = fullJson['address'];
 

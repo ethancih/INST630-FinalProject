@@ -1,4 +1,4 @@
-export async function updateDisplay(tempUnit, place) {
+export async function updateDisplay(tempUnit, place, changingScene) {
     console.log("Initial URL query string:", window.location.search);
 
     // Get the current URL parameters
@@ -11,6 +11,19 @@ export async function updateDisplay(tempUnit, place) {
     // Import weather data and update the weather display based on the selected unit and place
     const weatherData = await import("./weatherData.js");
     weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////// v Where I update the images with the help of weatherDetermine and call the subsequent animations v ////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const background2 = document.getElementById("background2");
+        background2.style.backgroundImage = "url('./assets/backgrounds/rainy-01.jpg')";
+    const weatherDetermine = await import("./weatherDetermine.js");
+        console.log("currWeather = " + weatherDetermine.currWeather());
+        
+    if (changingScene) {
+        
+    }
 }
 
 // Function to update the temperature unit in the URL

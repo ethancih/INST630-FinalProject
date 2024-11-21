@@ -32,7 +32,18 @@ body{
         height: 100%;
         width: 100%;
         position: absolute;
-        background-image: url("assets/backgrounds/sunny-01.jpg")/* , url("assets/backgrounds/test01.JPG")*/; 
+        background-image: url("./assets/backgrounds/sunny-01.jpg")/* , url("assets/backgrounds/test01.JPG")*/; 
+        background-position: center, center;
+        background-size: cover, cover;
+        background-repeat: no-repeat, no-repeat;
+    }
+
+    .background2 {
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-image: url("./assets/backgrounds/snowy-01.jpg")/* , url("assets/backgrounds/test01.JPG")*/; 
         background-position: center, center;
         background-size: cover, cover;
         background-repeat: no-repeat, no-repeat;
@@ -42,6 +53,8 @@ body{
 
 
 header {
+    position: absolute;
+    z-index: -2;
     margin-bottom: auto;
     font-size: 14px;
 }
@@ -204,7 +217,12 @@ button {
         font-size: 14px;
         min-width: 4ch;
     }
-    .table_Background {
+    .table_BG:hover {
+        background-color: rgba(255, 255, 255, 1);
+        padding: 9px;
+        border-radius: 10px;
+    }
+    .table0_Background {
         background-color: rgba(250, 250, 250, 0.65);
         padding: 9px;
         border-radius: 10px;
