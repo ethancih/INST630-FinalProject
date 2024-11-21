@@ -17,10 +17,13 @@ export async function updateDisplay(tempUnit, place, changingScene) {
     //////////////////// v Where I update the images with the help of weatherDetermine and call the subsequent animations v ////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const background2 = document.getElementById("background2");
-        background2.style.backgroundImage = "url('./assets/backgrounds/rainy-01.jpg')";
+    background2.style.backgroundImage = "url('./assets/backgrounds/rainy-01.jpg')";
+
     const weatherDetermine = await import("./weatherDetermine.js");
-        console.log("currWeather = " + weatherDetermine.currWeather());
-        
+    console.log("Waiting for weather to be set...");
+    const resolvedWeather = await weatherDetermine.waitForWeather();
+    console.log("currWeather = " + resolvedWeather);
+
     if (changingScene) {
         
     }
