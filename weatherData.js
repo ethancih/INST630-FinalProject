@@ -1,22 +1,34 @@
-export async function weatherDataMain(tempUnit) {
+export async function weatherDataMain(tempUnit, place) {
     console.log('Loaded weatherData.js');
   
-    const placeOptions = ["Taipei, Taiwan", "11555"]
-    const place = placeOptions[0];
+    // const placeOptions = ["Taipei, Taiwan", "11555", "New York City, NY, US", "College Park, MD, US"]
+    // const place = placeOptions[2];
 
-    const fullJson = await query(place, tempUnit);
+    const fullJson = await query(tempUnit, place);
 
-    var location = document.getElementById("location");
+    let location = document.getElementById("location");
     location.innerHTML = fullJson['address'];
 
-    var currTemp = document.getElementById("currTemp");
+    let localTime = document.getElementById("localTime");
+    localTime.innerHTML = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] > 0 ? "+" : "") + fullJson['tzoffset'] + ")";
+
+    let currTemp = document.getElementById("currTemp");
     currTemp.innerHTML = fullJson['currentConditions']['temp'] + "°";
 
-    var feelslike = document.getElementById("feelslike");
-    feelslike.innerHTML = "Feelslike: " + fullJson['currentConditions']['feelslike'] + "°";
+    let currTemp_high = document.getElementById("currTemp_high");
+    currTemp_high.innerHTML = fullJson['days'][0]['tempmax'] + "°";
 
-    var highLow = document.getElementById("highLow");
-    highLow.innerHTML = "High: " + fullJson['days']['0']['tempmax'] + "°  Low: " + fullJson['days']['0']['tempmin'] + "°";
+    let currTemp_low = document.getElementById("currTemp_low");
+    currTemp_low.innerHTML = fullJson['days'][0]['tempmin'] + "°";
+
+    let feelslike = document.getElementById("feelslike");
+    feelslike.innerHTML = fullJson['currentConditions']['feelslike'] + "°";
+
+    let feelslike_high = document.getElementById("feelslike_high");
+    feelslike_high.innerHTML = fullJson['days'][0]['feelslikemax'] + "°";
+
+    let feelslike_low = document.getElementById("feelslike_low");
+    feelslike_low.innerHTML = fullJson['days'][0]['feelslikemin'] + "°";
 
     let currHour = Math.floor(convertToDecimalHour(fullJson['currentConditions']['datetime']));
     console.log("currHour is " + currHour)
@@ -30,9 +42,9 @@ export async function weatherDataMain(tempUnit) {
         return (currHour+i <= 23) ? currHour+i : currHour+i-24;
     }
 
-    var time = document.getElementById("time0");
-    var temp = document.getElementById("temp0");
-    var rain = document.getElementById("rain0");
+    let time = document.getElementById("time0");
+    let temp = document.getElementById("temp0");
+    let rain = document.getElementById("rain0");
     for (let i = 0; i < 6; i++) {
         time = document.getElementById("time"+i);
         time.innerHTML = hourIteration(i);
@@ -54,7 +66,7 @@ export async function weatherDataMain(tempUnit) {
     time.innerHTML = "Now";
 }
 
-async function query(location, tempUnit) {
+async function query(tempUnit, location) {
     if (tempUnit === "celsius") {
         tempUnit = "metric";
     }
@@ -62,11 +74,33 @@ async function query(location, tempUnit) {
         tempUnit = "us";
     }
 
-    const results = await fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ location +"/today/tomorrow?unitGroup=" + tempUnit + "&key=98SKB8XS5PMLGFBLEPRHNSZAK&current");
+    const results = await fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ location +"/today/tomorrow?unitGroup=" + tempUnit + "&key=UYVW7XN8HWS29VJ3ECRHMGLF2&current");
     const fullJson = await results.json();
     console.log("here is fullJson; 0");
     console.log(fullJson);
 
     console.log(fullJson['address']);
     return fullJson;
+}
+
+function formatDateAndTime(dateStr, timeStr) {
+    // Combine the date and time into a single ISO string
+    const isoString = `${dateStr}T${timeStr}`;
+
+    // Create a Date object
+    const date = new Date(isoString);
+
+    // Get the day of the week
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayOfWeek = daysOfWeek[date.getDay()];
+
+    // Format the date to "yyyy/mm/dd"
+    const formattedDate = dateStr.replace(/-/g, "/");
+
+    // Process the time string
+    const [hours, minutes] = timeStr.split(":"); // Split only hours and minutes
+    const formattedTime = `${parseInt(hours, 10)}:${minutes}`; // Remove leading zero from hours and keep minutes
+
+    // Return the combined result
+    return `${formattedDate} ${dayOfWeek} ${formattedTime}`;
 }

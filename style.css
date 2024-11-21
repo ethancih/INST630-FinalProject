@@ -1,5 +1,11 @@
+/* Roboto */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+/* Bona Nova SC */
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
+/* STIX Two Text */
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap');
+/* Asap */
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* default to border-box */
 * {
@@ -10,37 +16,74 @@
 }
 
 body{
-    background-color: black;
+    background-color: rgb(36, 36, 36);
 
-    background-image: url("asset/characters/test02.png"), url("asset/backgrounds/test01.JPG");
-    background-position: center, center;
-    background-size: cover, cover;
-    background-repeat: no-repeat, no-repeat;
-
-    color: white;
-    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-family: "STIX Two Text", serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow-x: hidden;
+
+    .background {
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-image: url("assets/backgrounds/sunny-01.jpg")/* , url("assets/backgrounds/test01.JPG")*/; 
+        background-position: center, center;
+        background-size: cover, cover;
+        background-repeat: no-repeat, no-repeat;
+    }
 }
+
+
 
 header {
     margin-bottom: auto;
+    font-size: 14px;
 }
-  
-.container {
-    width: 38ch;
+
+.selectBox {
     position: absolute;
-    top: 5em;
-    right: 5em;
+    bottom: 256px;
+    right: 180px;
+}
+
+.selectBox select {
+    appearance: none;
+    width: 220px;
+    height: 30px;
+    padding-left: 10px;
+    background-color: white;
+    cursor: pointer;
+  }
+
+button {
+    position: absolute;
+    bottom: 256px;
+    right: 10px;
+    width: 160px;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+    border: 0;
+}
+
+.weatherContainer {
+    width: 390px;
+    height: 236px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: red;
-    .line{
+    background-color: white;
+    /* .line{
         width: 100%;
         height: 1.5rem;
         position: relative;
@@ -50,21 +93,122 @@ header {
             font-size: 1rem;
             line-height: 1.25rem;
         }
+    } */
+}
+
+.weatherWrapper_top {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    width: 352px;
+    /* padding-left: 17px; */
+    /* height: 105px; */
+    /* background-color: orangered; */
+}
+
+.weatherColumnWrapper_left {
+    display: flex;
+    flex-direction: column;
+    .weather {
+        font-size: 60px;
+        font-family: "STIX Two Text", serif;
+        font-weight: bold;
+    }
+    .location {
+        font-size: 18px;
+        font-family: "Asap", sans-serif;
+        font-weight: 600;
+        margin-top: -7px;;
+    }
+    .localTime {
+        font-size: 12px;
+        font-family: "Asap", sans-serif;
+        font-weight: normal;
+        margin-top: 5px;;
     }
 }
 
-.table {
+.weatherColumnWrapper_right {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-left: auto;
+    margin-top: 3px;
+
+    .feelslikeText {
+        font-size: 12px;
+        margin-top: 5px;
+        margin-bottom: -6px;
+    }
+    .weatherColumnWrapper_right_top {
+        display: flex;
+        flex-direction: row;
+        .currTemp {
+            font-size: 42px;
+            font-weight: 600;
+            margin-right: 9px;
+        }
+        .weatherColumnWrapper_right_top_right {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            margin-top: 6px;
+            gap: 3px;
+        }
+    }
+    .weatherColumnWrapper_right_bottom {
+        display: flex;
+        flex-direction: row;
+        .feelslike {
+            font-size: 42px;
+            margin-right: 9px;
+        }
+        .weatherColumnWrapper_right_bottom_right {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            margin-top: 6px;
+            gap: 3px;
+        }
+    }
 }
 
-canvas {
-    position: absolute;
-}
-
-button {
-    margin-bottom: 2em;
+.weatherWrapper_bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    text-align: center;
+    font-family: "Asap", sans-serif;
+    font-weight: normal;
+    margin-top: 6px;
+    .tableIcons {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        .tempIcon {
+            margin-top: 33px;
+        }
+        .rainIcon {
+            margin-top: 5px;
+        }
+    }
+    .times {
+        font-weight: bold;
+    }
+    .table0, .table1, .table2, .table3, .table4, .table5 {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 0;
+        padding: 9px;
+        font-size: 14px;
+        min-width: 4ch;
+    }
+    .table_Background {
+        background-color: whitesmoke;
+        padding: 9px;
+        border-radius: 10px;
+    }
 }
   
 /* footer {
@@ -81,9 +225,9 @@ button {
   
   /* Responsive layout - makes a one column layout instead of a two-column layout */
   /* the following are for desktop view */
-@media (min-width: 736px) {
-    .container {
+/* @media (min-width: 736px) {
+    .weatherContainer {
       margin-left: 4em;
       margin-right: 4em;
     }
-}
+} */

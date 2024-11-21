@@ -10,144 +10,94 @@
   
   
   <body>
-    <header><h1>weather.io</h1></header>
-    <div class="container">
-        <div class="line">
-            <span id="location">Location</span>
-        </div>
-        <div class="line">
-            <span id="currTemp">Current temperature</span>
-        </div>
-        <div class="line">
-            <span id="feelslike">Feelslike</span>
-        </div>
-        <div class="line">
-          <span id="highLow">High and Low</span>
-        </div>
+    
+    <header><h1>weather</h1></header>
+
+    <div class="background"></div>
+      
+      <div class="container">
+        <div class="selectBox">
+          <select id="selectBox">
+            <option>Choose a location</option>
+            <optgroup label="United States">
+                <option value="College Park, MD, US">College Park, MD</option>
+                <option value="New York City, NY, US">New York City, NY</option>
+                <option></option>
+            </optgroup>
         
-        <table class="line">
-          <tr>
-            <td>
-              <div class="line">
-                <span></span>
+            <optgroup label="Asia">
+                <option value="Taipei, Taiwan">Taipei, Taiwan</option>
+                <option>City 2 branch B</option>
+            </optgroup>
+          </select>
+        </div>
+    
+        <button id="tempUnitSelect">Change tempUnit</button>
+    
+        <div class="weatherContainer">
+          <div class="weatherWrapper_top">
+              <div class="weatherColumnWrapper_left">
+                      <span class="weather" id="weather">XXXXy</span>
+                      <span class="location" id="location">City, Country</span>
+                      <span class="localTime" id="localTime">yyyy/mm/dd Someday hh:mm (UTC+?)</span>
               </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="time0">Now</span>
+              <div class="weatherColumnWrapper_right">
+                  <div class="weatherColumnWrapper_right_top">
+                      <span class="currTemp" id="currTemp">10.0°</span>
+                      <div class="weatherColumnWrapper_right_top_right">
+                          <span class="currTemp_high" id="currTemp_high">10.0°</span>
+                          <span class="currTemp_low" id="currTemp_low">10.0°</span>
+                      </div>
+                  </div>
+                  <span class="feelslikeText">Feelslike</span>
+                  <div class="weatherColumnWrapper_right_bottom">
+                      <span class="feelslike" id="feelslike">10.0°</span>
+                      <div class="weatherColumnWrapper_right_bottom_right">
+                          <span class="feelslike_high" id="feelslike_high">10.0°</span>
+                          <span class="feelslike_low" id="feelslike_low">10.0°</span>
+                      </div>
+                  </div>
               </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="time1">19</span>
+          </div>
+          <div class="weatherWrapper_bottom">
+              <div class="tableIcons">
+                <img class="tempIcon" src="/assets/icons/Temperature icon.png">
+                <img class="rainIcon" src="/assets/icons/Rain Probability icon.png">
               </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="time2">20</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="time3">21</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="time4">22</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="time5">23</span>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="line">
-                <span>Temp</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="temp0">12°</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="temp1">12°</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="temp2">12°</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="temp3">11°</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="temp4">11°</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
-                <span id="temp5">11°</span>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="line">
-                <span>Rain</span>
-              </div>
-            </td>
-            <td>
-              <div class="line">
+              <div class="table0 table_Background">
+                <span class="times" id="time0">Now</span>
+                <span id="temp0">10°</span>
                 <span id="rain0">100%</span>
               </div>
-            </td>
-            <td>
-              <div class="line">
+              <div class="table1">
+                <span class="times" id="time1">19</span>
+                <span id="temp1">10°</span>
                 <span id="rain1">100%</span>
               </div>
-            </td>
-            <td>
-              <div class="line">
+              <div class="table2">
+                <span class="times" id="time2">20</span>
+                <span id="temp2">10°</span>
                 <span id="rain2">100%</span>
               </div>
-            </td>
-            <td>
-              <div class="line">
+              <div class="table3">
+                <span class="times" id="time3">21</span>
+                <span id="temp3">10°</span>
                 <span id="rain3">100%</span>
               </div>
-            </td>
-            <td>
-              <div class="line">
+              <div class="table4">
+                <span class="times" id="time4">22</span>
+                <span id="temp4">10°</span>
                 <span id="rain4">100%</span>
               </div>
-            </td>
-            <td>
-              <div class="line">
+              <div class="table5">
+                <span class="times" id="time5">23</span>
+                <span id="temp5">10°</span>
                 <span id="rain5">100%</span>
               </div>
-            </td>
-          </tr>
-        </table>
-    </div>
-
-    <!-- <div style="position: absolute; width: 100%; height: 100vh;">
-      <canvas id="canvas0" width="1920" height="1080" style="z-index: 1;"></canvas>
-      <canvas id="canvas1" width="270" height="480" style="z-index: 2;"></canvas>
-    </div> -->
-
-    <button id="tempUnitSelect">Change tempUnit</button>
+          </div>
+    
+        </div>
+      </div>
 
     <!-- <footer>Powered by <a href="https://www.visualcrossing.com/weather-api" target="_blank">VisualCrossing's weather API</a>.<br>Website made by I-Hsien (Ethan) Chen, 2024.</footer> -->
   </body>

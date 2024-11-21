@@ -1,89 +1,67 @@
+let dataDisplay;
+let tempUnit = "celsius"; // Default temperature unit
+let place = "College Park, MD, US"; // Default location
+
+// Executes mainEvent() when the page loads or reloads
+document.addEventListener("DOMContentLoaded", async () => mainEvent());
+
 async function mainEvent() {
   console.log('Loaded main.js');
 
-  // imports animation.js then executes the functions inside
-  // const weatherData = await import("./weatherData.js");
-  // weatherData.weatherDataMain();
-
-  // imports animation.js then executes the functions inside
+  // Dynamically import modules
+  dataDisplay = await import("./dataDisplay.js");
   const animation = await import("./animation.js");
+
+  // Run default animation
   animation.defaultAnimation();
 
-
-  // Run this function on page load
-  loadTempUnitFromUrl();
+  // Check the URL for existing parameters
+  const params = new URLSearchParams(window.location.search);
+  // Update tempUnit and place from URL or set defaults
+  tempUnit = params.get("tempUnit") || tempUnit;
+  place = params.get("place") || place;
+  // Update the weather display with the current parameters
+  dataDisplay.updateDisplay(tempUnit, place);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////// v For Changing the temperature unit and place v ////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
-//  Executes mainEvent() when the page loads or reloads
-document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the async keyword means we can make API requests
+// Event listener for the place drop-down select box
+const selectBox = document.getElementById("selectBox");
+selectBox.addEventListener("change", () => {
+  // Grab the selected place from the dropdown
+  place = selectBox.value;
 
-///////////////////////////////////////////////////////////////////////////////
-//////////////////// v For Changing the temperature unit v ////////////////////
-///////////////////////////////////////////////////////////////////////////////
+  // Check if a valid location was selected
+  if (!place || place === "Choose a location") {
+    console.log("No valid location selected.");
+    return; // Don't update if no valid location is selected
+  }
+
+  console.log(`Selected place: ${place}`);
+
+  // Update the URL and display
+  updateURL("place", place);
+  dataDisplay.updateDisplay(tempUnit, place);
+});
 
 // Event listener for the temperature unit change button
 document.getElementById("tempUnitSelect").addEventListener("click", () => {
-  updateTempUnit(); // Call the function to change the temperature unit
+  // Toggle between celsius and fahrenheit
+  tempUnit = (tempUnit === "celsius") ? "fahrenheit" : "celsius";
+
+  console.log(`Changed temperature unit to: ${tempUnit}`);
+
+  // Update the URL and display
+  updateURL("tempUnit", tempUnit);
+  dataDisplay.updateDisplay(tempUnit, place);
 });
 
-async function loadTempUnitFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const tempUnit = params.get("tempUnit");
-  if (tempUnit) {
-      console.log("Applying temperature unit: " + tempUnit);
-      updateTemperatureDisplay(tempUnit);
-  } else {
-      // If no tempUnit parameter, default to 'celsius'
-      console.log("No temperature unit found in URL, defaulting to celsius.");
-      updateTemperatureDisplay("celsius");
-  }
-}
-
-function getTempUnitFromUrl() {
-  const queryString = window.location.search; // Get the query string from the current URL
-  const params = new URLSearchParams(queryString);  // Create a URLSearchParams object
-  const tempUnit = params.get('tempUnit');  // Get the value of the 'tempUnit' parameter
-  return tempUnit ? tempUnit : 'celsius'; // Return the value or a default if it's not set  // default to 'celsius' if not found
-}
-
-function updateTempUnit() {
-  console.log("changing temp unit");
-
-  // Get the current temperature unit from the URL
-  let tempUnit = getTempUnitFromUrl();
-
-  // Toggle between celsius and fahrenheit
-  if (tempUnit === "celsius") {
-    tempUnit = "fahrenheit";
-    console.log("Changing to fahrenheit");
-  } else {
-    tempUnit = "celsius";
-    console.log("Changing to celsius");
-  }
-
-  // Update the URL with the new temperature unit
-  const newUrl = new URL(window.location.href);
-  newUrl.searchParams.set("tempUnit", tempUnit);
-  history.replaceState(null, "", newUrl);
-
-  // Update the temperature display based on the selected unit
-  console.log("Temperature unit set to " + tempUnit);
-  updateTemperatureDisplay(tempUnit);
-}
-
-// Example function to update temperature display based on the unit
-async function updateTemperatureDisplay(tempUnit) {
-    // Logic to convert and display temperature based on the selected unit
-    if (tempUnit === "celsius") {
-      const weatherData = await import("./weatherData.js");
-      weatherData.weatherDataMain(tempUnit);
-    } else if (tempUnit === "fahrenheit") {
-      const weatherData = await import("./weatherData.js");
-      weatherData.weatherDataMain(tempUnit);
-    }
-    else {
-      console.log("None in tempUnit");
-      weatherData.weatherDataMain("celsius");
-    }
+// Function to update the URL with new query parameters
+function updateURL(param, value) {
+  const url = new URL(window.location.href);
+  url.searchParams.set(param, value);
+  history.replaceState(null, "", url); // Update the URL without reloading the page
 }
