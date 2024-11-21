@@ -7,32 +7,27 @@ export async function weatherDataMain(tempUnit, place) {
     const fullJson = await query(tempUnit, place);
 
     const weatherDetermine = await import("./weatherDetermine.js");
-    let weather = document.getElementById("weather");
-    weather.innerHTML = weatherDetermine.weatherDetermine(fullJson);
+    document.getElementById("weather").innerHTML = weatherDetermine.weatherDetermine(fullJson);
 
-    let location = document.getElementById("location");
-    location.innerHTML = fullJson['address'];
+    document.getElementById("location").innerHTML = fullJson['address'];
 
-    let localTime = document.getElementById("localTime");
-    localTime.innerHTML = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] > 0 ? "+" : "") + fullJson['tzoffset'] + ")";
+    document.getElementById("localTime").innerHTML = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] > 0 ? "+" : "") + fullJson['tzoffset'] + ")";
 
-    let currTemp = document.getElementById("currTemp");
-    currTemp.innerHTML = fullJson['currentConditions']['temp'] + "°";
+    document.getElementById("currTemp").innerHTML = fullJson['currentConditions']['temp'] + "°";
 
-    let currTemp_high = document.getElementById("currTemp_high");
-    currTemp_high.innerHTML = fullJson['days'][0]['tempmax'] + "°";
+    document.getElementById("currTemp_high").innerHTML = fullJson['days'][0]['tempmax'] + "°";
 
-    let currTemp_low = document.getElementById("currTemp_low");
-    currTemp_low.innerHTML = fullJson['days'][0]['tempmin'] + "°";
+    document.getElementById("currTemp_low").innerHTML = fullJson['days'][0]['tempmin'] + "°";
 
-    let feelslike = document.getElementById("feelslike");
-    feelslike.innerHTML = fullJson['currentConditions']['feelslike'] + "°";
+    document.getElementById("feelslike").innerHTML = fullJson['currentConditions']['feelslike'] + "°";
 
-    let feelslike_high = document.getElementById("feelslike_high");
-    feelslike_high.innerHTML = fullJson['days'][0]['feelslikemax'] + "°";
+    document.getElementById("feelslike_high").innerHTML = fullJson['days'][0]['feelslikemax'] + "°";
 
-    let feelslike_low = document.getElementById("feelslike_low");
-    feelslike_low.innerHTML = fullJson['days'][0]['feelslikemin'] + "°";
+    document.getElementById("feelslike_low").innerHTML = fullJson['days'][0]['feelslikemin'] + "°";
+
+    ////////////////////////////////////////////////////////////////////
+    //////////////////// v For handling the table v ////////////////////
+    ////////////////////////////////////////////////////////////////////
 
     let currHour = Math.floor(convertToDecimalHour(fullJson['currentConditions']['datetime']));
     console.log("currHour is " + currHour)
