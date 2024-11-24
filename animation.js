@@ -1,4 +1,4 @@
-function defaultAnimation() {
+export function defaultAnimation() {
   console.log('Loaded animation.js');
 
   gsap.from(".weatherContainer", 1.8, {
@@ -37,5 +37,3 @@ function defaultAnimation() {
     delay: 3
   })
 }
-
-export {defaultAnimation};
