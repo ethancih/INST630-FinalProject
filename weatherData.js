@@ -1,10 +1,19 @@
+const weatherArray = ["Sunny", "Rainy", "Cloudy", "Snowy"]
+
+// export async function weatherDataSpecial(tempUnit, place) {
+//     const fullJson = await query(tempUnit, place);
+
+//     const weatherDetermine = await import("./weatherDetermine.js");
+//     weatherDetermine.weatherDetermine(fullJson);
+// }
+
 export async function weatherDataMain(tempUnit, place) {
     console.log('Loaded weatherData.js');
 
     const fullJson = await query(tempUnit, place);
 
     const weatherDetermine = await import("./weatherDetermine.js");
-    document.getElementById("weather").innerHTML = weatherDetermine.weatherDetermine(fullJson);
+    document.getElementById("weather").innerHTML = weatherArray[weatherDetermine.weatherDetermine(fullJson)];
 
     document.getElementById("location").innerHTML = fullJson['address'];
 
@@ -27,7 +36,7 @@ export async function weatherDataMain(tempUnit, place) {
     ////////////////////////////////////////////////////////////////////
 
     let currHour = Math.floor(convertToDecimalHour(fullJson['currentConditions']['datetime']));
-    console.log("currHour is " + currHour)
+    // console.log("currHour is " + currHour)
 
     function convertToDecimalHour(timeString) {
         const [hour, minute, second] = timeString.split(':').map(Number);
@@ -75,7 +84,7 @@ async function query(tempUnit, location) {
     console.log("here is fullJson; 0");
     console.log(fullJson);
 
-    console.log(fullJson['address']);
+    // console.log(fullJson['address']);
     return fullJson;
 }
 

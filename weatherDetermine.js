@@ -2,7 +2,8 @@ let weather;
 
 export function weatherDetermine(fullJson) {
     console.log("weatherDetermine() executed.");
-    weather = "Rainy"; // Replace this with actual logic using fullJson
+    weather = Math.floor(Math.random() * 4); // Replace this with actual logic using fullJson
+    console.log("weather = " + weather);
     return weather;
 }
 

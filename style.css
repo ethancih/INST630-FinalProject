@@ -27,12 +27,12 @@ body{
     height: 100vh;
     overflow-x: hidden;
 
-    .background {
+    .background1 {
         z-index: -1;
         height: 100%;
         width: 100%;
         position: absolute;
-        background-image: url("./assets/backgrounds/sunny-01.jpg")/* , url("assets/backgrounds/test01.JPG")*/; 
+        background-image: url("")/* , url("assets/backgrounds/test01.JPG")*/; 
         background-position: center, center;
         background-size: cover, cover;
         background-repeat: no-repeat, no-repeat;
@@ -43,10 +43,12 @@ body{
         height: 100%;
         width: 100%;
         position: absolute;
-        background-image: url("./assets/backgrounds/snowy-01.jpg")/* , url("assets/backgrounds/test01.JPG")*/; 
+        background-image: url("")/* , url("assets/backgrounds/test01.JPG")*/; 
         background-position: center, center;
         background-size: cover, cover;
         background-repeat: no-repeat, no-repeat;
+
+        display: none;
     }
 }
 

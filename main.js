@@ -36,7 +36,7 @@ selectBox.addEventListener("change", () => {
 
   // Check if a valid location was selected
   if (!place || place === "Choose a location") {
-    console.log("No valid location selected.");
+    // console.log("No valid location selected.");
     return; // Don't update if no valid location is selected
   }
 
