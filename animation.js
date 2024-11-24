@@ -57,8 +57,8 @@ export async function transAnimation() {
   }
 
   async function updateData() {
-    const weatherData = await import("./weatherData.js");
-    weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+    // const weatherData = await import("./weatherData.js");
+    // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
   }
   
 }
