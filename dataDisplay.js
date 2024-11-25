@@ -14,15 +14,13 @@ export async function updateDisplay(tempUnit, place, changingScene) {
     if (changingScene) {
         console.log("Changing scene");
         const animation = await import("./animation.js");
-        animation.transAnimation(changingScene);
-
-        weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+        animation.transAnimation();
+        
+        // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     }
     else {
         weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     }
-    
-    
 }
 
 // Function to update the temperature unit in the URL

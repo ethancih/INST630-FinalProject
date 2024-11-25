@@ -1,16 +1,17 @@
 const weatherArray = ["Sunny", "Rainy", "Cloudy", "Snowy"]
+let fullJson;
 
-// export async function weatherDataSpecial(tempUnit, place) {
-//     const fullJson = await query(tempUnit, place);
-
-//     const weatherDetermine = await import("./weatherDetermine.js");
-//     weatherDetermine.weatherDetermine(fullJson);
-// }
+export async function getFullJson() {
+    if (!fullJson) {
+        fullJson = await query(tempUnit, place);
+    }
+    return fullJson;
+}
 
 export async function weatherDataMain(tempUnit, place) {
     console.log('Loaded weatherData.js');
 
-    const fullJson = await query(tempUnit, place);
+    fullJson = await query(tempUnit, place);
 
     const weatherDetermine = await import("./weatherDetermine.js");
     document.getElementById("weather").innerHTML = weatherArray[weatherDetermine.weatherDetermine(fullJson)];

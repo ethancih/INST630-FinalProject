@@ -1,6 +1,7 @@
 console.log('Loaded animation.js');
 
 const weatherDetermine = await import("./weatherDetermine.js");
+const weatherData = await import("./weatherData.js");
 
 const backgrounds = [ ["./assets/backgrounds/sunny-01.jpg"],
                       ["./assets/backgrounds/rainy-01.jpg"], 
@@ -8,7 +9,6 @@ const backgrounds = [ ["./assets/backgrounds/sunny-01.jpg"],
                       ["./assets/backgrounds/snowy-01.jpg"] ];
 
 export async function defaultAnimation() {
-
   console.log("defaultAnimation EXECUTED");
 
   console.log("Waiting for weather to be set...");
@@ -22,11 +22,16 @@ export async function defaultAnimation() {
   gsap.from(".selectBox", 1.8, { x: "100vw", ease: "power4.out", delay: 0.3 });
   gsap.from("button", 1.8, { x: "100vw", ease: "power4.out", delay: 0.4 });
   
-  gsap.from(".background1", 1.8, { xPercent: 100, ease: "power3.out", delay: 1 });
-  gsap.set(".background2", { xPercent: 0, delay: 0 });
+  gsap.from(".background1", 1.8, { xPercent: 100, ease: "power3.out", delay: 1, onComplete: () => disableSelect(false) });
+  gsap.set(".background2", { xPercent: 0 });
 }
 
 export async function transAnimation() {
+  disableSelect(true);
+  console.error("1");
+  const fullJson = await weatherData.getFullJson();
+  weatherDetermine.weatherDetermine(fullJson);
+  console.error("2");
   const currWeather = await weatherDetermine.waitForWeather();
   console.log("currWeather = " + currWeather);
 
@@ -34,16 +39,16 @@ export async function transAnimation() {
 
   tl.fromTo(".weatherContainer", 1, { x: "0" }, { x: "-100vw", ease: "power3.in" } );
   tl.fromTo(".selectBox", 1, { x: "0" }, { x: "-100vw", ease: "power3.in" }, '<')
-  tl.fromTo("button", 1, { x: "0" }, { x: "-100vw", ease: "power3.in", onComplete: updateData }, '<');
+  tl.fromTo("button", 1, { x: "0" }, { x: "-100vw", ease: "power3.in", onComplete: () => updateData() }, '<');
 
   document.getElementById("background2").style.display = "block";
-  tl.set(".background2", { xPercent: 0 }, '>0.15')
+  tl.set(".background2", { xPercent: 0 }, '>0.1')
   tl.set(".background1", { xPercent: 100, onComplete: updateBG1 }, '<');
   tl.to(".background2", 1.8, { xPercent: -100, ease: "power3.out" }, '<')
   tl.to(".background1", 1.8, { xPercent: 0, ease: "power3.out", onComplete: updateBG2 }, '>0.25');
   
   tl.from(".weatherContainer", 1.8, { x: "100vw", ease: "power4.out" }, '<0.35')
-  tl.from(".selectBox", 1.8, { x: "100vw", ease: "power4.out" }, '<0.3')
+  tl.from(".selectBox", 1.8, { x: "100vw", ease: "power4.out", onComplete: () => disableSelect(false)  }, '<0.3')
   tl.from("button", 1.8, { x: "100vw", ease: "power4.out" }, '<0.1');
 
   function updateBG1() {
@@ -57,8 +62,10 @@ export async function transAnimation() {
   }
 
   async function updateData() {
-    // const weatherData = await import("./weatherData.js");
-    // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+    weatherData.weatherDataMain(tempUnit, place, true);  // Call with updated parameters
   }
-  
+}
+
+function disableSelect(bool) {
+    document.getElementById("selectBox").disabled = bool;
 }
