@@ -10,16 +10,17 @@ export async function updateDisplay(tempUnit, place, changingScene) {
 
     // Import weather data and update the weather display based on the selected unit and place
     const weatherData = await import("./weatherData.js");
+    weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     // Update the images with the help of weatherDetermine and call the subsequent animations
     if (changingScene) {
         console.log("Changing scene");
         const animation = await import("./animation.js");
         animation.transAnimation();
         
-        // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+        
     }
     else {
-        weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+        // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     }
 }
 

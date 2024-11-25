@@ -1,8 +1,10 @@
+
 const weatherArray = ["Sunny", "Rainy", "Cloudy", "Snowy"]
 let fullJson;
 
 export async function getFullJson() {
     if (!fullJson) {
+        console.error("This is getFullJson()")
         fullJson = await query(tempUnit, place);
     }
     return fullJson;
@@ -11,6 +13,7 @@ export async function getFullJson() {
 export async function weatherDataMain(tempUnit, place) {
     console.log('Loaded weatherData.js');
 
+    console.error("This is weatherDataMain()")
     fullJson = await query(tempUnit, place);
 
     const weatherDetermine = await import("./weatherDetermine.js");

@@ -1,3 +1,4 @@
+
 let dataDisplay;
 let tempUnit = "celsius"; // Default temperature unit
 let place = "College Park, MD, US"; // Default location
