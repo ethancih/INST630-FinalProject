@@ -4,7 +4,7 @@ const weatherDetermine = await import("./weatherDetermine.js");
 const weatherData = await import("./weatherData.js");
 
 const backgrounds = [ ["./assets/backgrounds/sunny-01.jpg"],
-                      ["./assets/backgrounds/rainy-01.jpg"], 
+                      ["./assets/backgrounds/rainy-02.jpg"], 
                       ["./assets/backgrounds/cloudy-01.jpg"],
                       ["./assets/backgrounds/snowy-01.jpg"] ];
 
