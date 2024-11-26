@@ -21,7 +21,7 @@ export async function weatherDataMain(tempUnit, place) {
 
     document.getElementById("location").innerHTML = fullJson['address'];
 
-    document.getElementById("localTime").innerHTML = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] > 0 ? "+" : "") + fullJson['tzoffset'] + ")";
+    document.getElementById("localTime").innerHTML = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] >= 0 ? "+" : "") + fullJson['tzoffset'] + ")";
 
     document.getElementById("currTemp").innerHTML = fullJson['currentConditions']['temp'] + "°";
 
