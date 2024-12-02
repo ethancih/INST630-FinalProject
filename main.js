@@ -58,6 +58,14 @@ document.getElementById("tempUnitSelect").addEventListener("click", () => {
   // Update the URL and display
   updateURL("tempUnit", tempUnit);
   dataDisplay.updateDisplay(tempUnit, place, false);
+
+  if (tempUnit === "celsius") {
+    document.getElementById("tempUnitSelect").innerHTML = "Change to °F";
+  }
+  else {
+    document.getElementById("tempUnitSelect").innerHTML = "Change to °C";
+  }
+  
 });
 
 // Function to update the URL with new query parameters
