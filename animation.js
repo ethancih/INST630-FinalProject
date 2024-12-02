@@ -9,7 +9,7 @@ const backgrounds = [ ["./assets/backgrounds/sunny-01.jpg", "./assets/background
                       ["./assets/backgrounds/snowy-01.jpg", "./assets/backgrounds/snowy-02.jpg", "./assets/backgrounds/snowy-03.jpg"] ];
 let bgCounter = [0, 0, 0, 0];
 function iterateBgCounter(currWeather) {
-  if (bgCounter[currWeather] <= 2) {
+  if (bgCounter[currWeather] < 2) {
     bgCounter[currWeather] += 1;
   }
   else {
@@ -64,12 +64,13 @@ export async function transAnimation() {
 
   function updateBG1() {
     document.getElementById("background1").style.backgroundImage = "url('"+ backgrounds[currWeather][bgCounter[currWeather]] +"')";
-    console.log("updated BG1");
+    console.log("updated BG1 to " + backgrounds[currWeather][bgCounter[currWeather]]);
   }
 
   function updateBG2() {
     document.getElementById("background2").style.backgroundImage = "url('"+ backgrounds[currWeather][bgCounter[currWeather]] +"')";
     iterateBgCounter(currWeather);
+    console.log("updated BG2 to " + backgrounds[currWeather][bgCounter[currWeather]]);
     console.log("animation complete");
   }
 
