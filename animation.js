@@ -77,8 +77,8 @@ export async function transAnimation() {
 
   function updateBG2() {
     document.getElementById("background2").style.backgroundImage = "url('"+ backgrounds[currWeather][bgCounter[currWeather]] +"')";
-    iterateBgCounter(currWeather);
     console.log("updated BG2 to " + backgrounds[currWeather][bgCounter[currWeather]]);
+    iterateBgCounter(currWeather);
     console.log("animation complete");
   }
 

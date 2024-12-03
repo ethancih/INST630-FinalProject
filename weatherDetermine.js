@@ -2,7 +2,6 @@ let weather;
 
 export function weatherDetermine(fullJson) {
     console.log("weatherDetermine() executed.");
-    // weather = Math.floor(Math.random() * 4); // Replace this with actual logic using fullJson
 
     let cloudCover = fullJson['currentConditions']['cloudcover'];
 
