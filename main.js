@@ -7,7 +7,6 @@ let place = "College Park, MD, US"; // Default location
 document.addEventListener("DOMContentLoaded", async () => mainEvent());
 
 async function mainEvent() {
-  console.log('Loaded main.js');
 
   // Dynamically import modules
   dataDisplay = await import("./dataDisplay.js");
