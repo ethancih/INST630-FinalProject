@@ -2,4 +2,4 @@
 
 
 
-Website link: <a href="https://ethancih.github.io/INST630-FinalProject/" target="_blank">https://ethancih.github.io/INST630-FinalProject/</a>
+Website link: https://ethancih.github.io/INST630-FinalProject/
