@@ -28,7 +28,7 @@ export function weatherDetermine(fullJson) {
         weather = 0; //Sunny
     }
 
-    console.log("weather = " + weather);
+    console.log("weatherDetermine() says weather = " + weather);
     return weather;
 }
 
