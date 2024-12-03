@@ -1,45 +1,33 @@
 
 const weatherArray = ["Sunny", "Rainy", "Cloudy", "Snowy"]
 let fullJson;
-
-export async function getFullJson() {
-    if (!fullJson) {
-        console.error("This is getFullJson()")
-        fullJson = await query(tempUnit, place);
-    }
-    return fullJson;
-}
+let data =  {   "weather": "", "location": "", "localTime": "", "currTemp": "", "currTemp_high": "", "currTemp_low": "",
+                "feelslike": "", "feelslike_high": "", "feelslike_low": "", "time": [], "temp": [], "rain": []
+            };
+let currHour;
 
 export async function weatherDataMain(tempUnit, place) {
     console.log('Loaded weatherData.js');
 
-    console.error("This is weatherDataMain()")
+    console.log("This is weatherDataMain()")
     fullJson = await query(tempUnit, place);
 
     const weatherDetermine = await import("./weatherDetermine.js");
-    document.getElementById("weather").innerHTML = weatherArray[weatherDetermine.weatherDetermine(fullJson)];
-
-    document.getElementById("location").innerHTML = fullJson['address'];
-
-    document.getElementById("localTime").innerHTML = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] >= 0 ? "+" : "") + fullJson['tzoffset'] + ")";
-
-    document.getElementById("currTemp").innerHTML = fullJson['currentConditions']['temp'] + "°";
-
-    document.getElementById("currTemp_high").innerHTML = fullJson['days'][0]['tempmax'] + "°";
-
-    document.getElementById("currTemp_low").innerHTML = fullJson['days'][0]['tempmin'] + "°";
-
-    document.getElementById("feelslike").innerHTML = fullJson['currentConditions']['feelslike'] + "°";
-
-    document.getElementById("feelslike_high").innerHTML = fullJson['days'][0]['feelslikemax'] + "°";
-
-    document.getElementById("feelslike_low").innerHTML = fullJson['days'][0]['feelslikemin'] + "°";
+    data["weather"] = weatherArray[weatherDetermine.weatherDetermine(fullJson)];
+    data["location"] = fullJson['address'];
+    data["localTime"] = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] >= 0 ? "+" : "") + fullJson['tzoffset'] + ")";
+    data["currTemp"] = fullJson['currentConditions']['temp'] + "°";
+    data["currTemp_high"] = fullJson['days'][0]['tempmax'] + "°";
+    data["currTemp_low"] = fullJson['days'][0]['tempmin'] + "°";
+    data["feelslike"] = fullJson['currentConditions']['feelslike'] + "°";
+    data["feelslike_high"] = fullJson['days'][0]['feelslikemax'] + "°";
+    data["feelslike_low"] = fullJson['days'][0]['feelslikemin'] + "°";
 
     ////////////////////////////////////////////////////////////////////
     //////////////////// v For handling the table v ////////////////////
     ////////////////////////////////////////////////////////////////////
 
-    let currHour = Math.floor(convertToDecimalHour(fullJson['currentConditions']['datetime']));
+    currHour = Math.floor(convertToDecimalHour(fullJson['currentConditions']['datetime']));
     // console.log("currHour is " + currHour)
 
     function convertToDecimalHour(timeString) {
@@ -51,28 +39,61 @@ export async function weatherDataMain(tempUnit, place) {
         return (currHour+i <= 23) ? currHour+i : currHour+i-24;
     }
 
+    for (let i = 0; i < 6; i++) {
+        data["time"][i] = hourIteration(i);
+        if (currHour+i <= 23) {
+            data["temp"][i] = fullJson['days']['0']['hours'][hourIteration(i)]['temp'] + "°";
+            data["rain"][i] = Math.round(fullJson['days']['0']['hours'][hourIteration(i)]['precipprob']/10)*10 + "%";
+        }
+        else {
+            data["temp"][i] = fullJson['days']['1']['hours'][hourIteration(i)]['temp'] + "°";
+            data["rain"][i] = Math.round(fullJson['days']['1']['hours'][hourIteration(i)]['precipprob']/10)*10 + "%";
+        }
+    }
+    data["time"][0] = "Now";
+
+    console.table(data);
+}
+
+export function updateWeatherData() {
+    // weatherDataMain().then(() => {
+    //     console.log("updateWeatherData() continues...");
+    // });
+
+    document.getElementById("weather").innerHTML = data["weather"];
+    document.getElementById("location").innerHTML = data["location"];
+    document.getElementById("localTime").innerHTML = data["localTime"];
+    document.getElementById("currTemp").innerHTML = data["currTemp"];
+    document.getElementById("currTemp_high").innerHTML = data["currTemp_high"];
+    document.getElementById("currTemp_low").innerHTML = data["currTemp_low"];
+    document.getElementById("feelslike").innerHTML = data["feelslike"];
+    document.getElementById("feelslike_high").innerHTML = data["feelslike_high"];
+    document.getElementById("feelslike_low").innerHTML = data["feelslike_low"];
+
+    ////////////////////////////////////////////////////////////////////
+    //////////////////// v For handling the table v ////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     let time = document.getElementById("time0");
     let temp = document.getElementById("temp0");
     let rain = document.getElementById("rain0");
     for (let i = 0; i < 6; i++) {
         time = document.getElementById("time"+i);
-        time.innerHTML = hourIteration(i);
+        time.innerHTML = data["time"][i]
 
         temp = document.getElementById("temp"+i);
         rain = document.getElementById("rain"+i);
         if (currHour+i <= 23) {
-            temp.innerHTML = fullJson['days']['0']['hours'][hourIteration(i)]['temp'] + "°";
-            rain.innerHTML = Math.round(fullJson['days']['0']['hours'][hourIteration(i)]['precipprob']/10)*10 + "%";
+            temp.innerHTML = data["temp"][i];
+            rain.innerHTML = data["rain"][i];
         }
         else {
-            temp.innerHTML = fullJson['days']['1']['hours'][hourIteration(i)]['temp'] + "°";
-            rain.innerHTML = Math.round(fullJson['days']['1']['hours'][hourIteration(i)]['precipprob']/10)*10 + "%";
+            temp.innerHTML = data["temp"][i];
+            rain.innerHTML = data["rain"][i];
         }
-
-        console.log(hourIteration(i));
     }
     time = document.getElementById("time0");
-    time.innerHTML = "Now";
+    time.innerHTML = data["time"][0];
 }
 
 async function query(tempUnit, location) {

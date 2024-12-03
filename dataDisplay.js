@@ -1,4 +1,8 @@
-export async function updateDisplay(tempUnit, place, changingScene) {
+const weatherData = await import("./weatherData.js");
+const animation = await import("./animation.js");
+
+export async function updateDisplay(tempUnit, place, changingScene, changingTempUnit) {
+    console.clear();
     console.log("Initial URL query string:", window.location.search);
 
     // Get the current URL parameters
@@ -9,18 +13,17 @@ export async function updateDisplay(tempUnit, place, changingScene) {
     updatePlace(place);
 
     // Import weather data and update the weather display based on the selected unit and place
-    const weatherData = await import("./weatherData.js");
     weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     // Update the images with the help of weatherDetermine and call the subsequent animations
     if (changingScene) {
         console.log("Changing scene");
-        const animation = await import("./animation.js");
         animation.transAnimation();
-        
-        
+    }
+    else if (changingTempUnit) {
+        console.log("Changing tempUnit");
+        animation.animForcedByChangingTempUnit();
     }
     else {
-        // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     }
 }
 

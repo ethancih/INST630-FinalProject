@@ -22,7 +22,7 @@ async function mainEvent() {
   tempUnit = params.get("tempUnit") || tempUnit;
   place = params.get("place") || place;
   // Update the weather display with the current parameters
-  dataDisplay.updateDisplay(tempUnit, place, false);
+  dataDisplay.updateDisplay(tempUnit, place, false, false);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ selectBox.addEventListener("change", () => {
 
   // Update the URL and display
   updateURL("place", place);
-  dataDisplay.updateDisplay(tempUnit, place, true);
+  dataDisplay.updateDisplay(tempUnit, place, true, false);
 });
 
 // Event listener for the temperature unit change button
@@ -57,7 +57,7 @@ document.getElementById("tempUnitSelect").addEventListener("click", () => {
 
   // Update the URL and display
   updateURL("tempUnit", tempUnit);
-  dataDisplay.updateDisplay(tempUnit, place, false);
+  dataDisplay.updateDisplay(tempUnit, place, false, true);
 
   if (tempUnit === "celsius") {
     document.getElementById("tempUnitSelect").innerHTML = "Change to °F";

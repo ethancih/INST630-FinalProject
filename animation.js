@@ -29,6 +29,7 @@ export async function defaultAnimation() {
   document.getElementById("background2").style.backgroundImage = "url('"+ backgrounds[currWeather][bgCounter[currWeather]] +"')";
   iterateBgCounter(currWeather);
 
+  weatherData.updateWeatherData();
   gsap.from(".weatherContainer", 1.8, { x: "100vw", ease: "power4.out", delay: 0 });
   gsap.from(".selectBox", 1.8, { x: "100vw", ease: "power4.out", delay: 0.3 });
   gsap.from("button", 1.8, { x: "100vw", ease: "power4.out", delay: 0.4 });
@@ -37,12 +38,17 @@ export async function defaultAnimation() {
   gsap.set(".background2", { xPercent: 0 });
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function animForcedByChangingTempUnit() {
+  await sleep(100);
+  weatherData.updateWeatherData();
+}
+
 export async function transAnimation() {
   disableSelect(true);
-  console.error("1");
-  const fullJson = await weatherData.getFullJson();
-  weatherDetermine.weatherDetermine(fullJson);
-  console.error("2");
   const currWeather = await weatherDetermine.waitForWeather();
   console.log("currWeather = " + currWeather);
 
@@ -75,7 +81,8 @@ export async function transAnimation() {
   }
 
   async function updateData() {
-    weatherData.weatherDataMain(tempUnit, place, true);  // Call with updated parameters
+    // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+    weatherData.updateWeatherData();
   }
 }
 
