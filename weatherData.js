@@ -1,4 +1,3 @@
-
 const weatherArray = ["Sunny", "Rainy", "Cloudy", "Snowy"]
 let fullJson;
 let data =  {   "weather": "", "location": "", "localTime": "", "currTemp": "", "currTemp_high": "", "currTemp_low": "",
@@ -13,7 +12,7 @@ export async function weatherDataMain(tempUnit, place) {
     fullJson = await query(tempUnit, place);
 
     const weatherDetermine = await import("./weatherDetermine.js");
-    data["weather"] = weatherArray[weatherDetermine.weatherDetermine(fullJson)];
+    data["weather"] = await weatherArray[weatherDetermine.weatherDetermine(fullJson)];
     data["location"] = fullJson['address'];
     data["localTime"] = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] >= 0 ? "+" : "") + fullJson['tzoffset'] + ")";
     data["currTemp"] = fullJson['currentConditions']['temp'].toFixed(1) + "°";
@@ -100,7 +99,7 @@ async function query(tempUnit, location) {
     }
 
     const results = await fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ location +"/today/tomorrow?unitGroup=" + tempUnit + "&key=UYVW7XN8HWS29VJ3ECRHMGLF2&current");
-    const fullJson = await results.json();
+    const fullJson = results.json();
     console.log("here is fullJson; 0");
     console.log(fullJson);
 

@@ -50,7 +50,7 @@ export async function animForcedByChangingTempUnit() {
 export async function transAnimation() {
   disableSelect(true);
   // update the weather data based on the selected unit and place
-  weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
+  await weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
   const currWeather = await weatherDetermine.waitForWeather();
   console.log("transAnimation() says currWeather = " + currWeather);
   console.timeEnd("weatherRace");
