@@ -29,6 +29,7 @@ export function weatherDetermine(fullJson) {
     }
 
     console.log("weatherDetermine() says weather = " + weather);
+    console.time("weatherRace");
     return weather;
 }
 
