@@ -3,7 +3,7 @@ const animation = await import("./animation.js");
 
 export async function updateDisplay(tempUnit, place, changingScene, changingTempUnit) {
     console.clear();
-    console.log("Version: 2024/12/02-23:04")
+    console.log("Version: 2024/12/02-23:13")
     console.log("Initial URL query string:", window.location.search);
 
     // Get the current URL parameters
