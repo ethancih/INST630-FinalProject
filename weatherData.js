@@ -16,12 +16,12 @@ export async function weatherDataMain(tempUnit, place) {
     data["weather"] = weatherArray[weatherDetermine.weatherDetermine(fullJson)];
     data["location"] = fullJson['address'];
     data["localTime"] = formatDateAndTime(fullJson['days'][0]['datetime'], fullJson['currentConditions']["datetime"]) + " (UTC" + (fullJson['tzoffset'] >= 0 ? "+" : "") + fullJson['tzoffset'] + ")";
-    data["currTemp"] = fullJson['currentConditions']['temp'] + "°";
-    data["currTemp_high"] = fullJson['days'][0]['tempmax'] + "°";
-    data["currTemp_low"] = fullJson['days'][0]['tempmin'] + "°";
-    data["feelslike"] = fullJson['currentConditions']['feelslike'] + "°";
-    data["feelslike_high"] = fullJson['days'][0]['feelslikemax'] + "°";
-    data["feelslike_low"] = fullJson['days'][0]['feelslikemin'] + "°";
+    data["currTemp"] = fullJson['currentConditions']['temp'].toFixed(1) + "°";
+    data["currTemp_high"] = fullJson['days'][0]['tempmax'].toFixed(1) + "°";
+    data["currTemp_low"] = fullJson['days'][0]['tempmin'].toFixed(1) + "°";
+    data["feelslike"] = fullJson['currentConditions']['feelslike'].toFixed(1) + "°";
+    data["feelslike_high"] = fullJson['days'][0]['feelslikemax'].toFixed(1) + "°";
+    data["feelslike_low"] = fullJson['days'][0]['feelslikemin'].toFixed(1) + "°";
 
     ////////////////////////////////////////////////////////////////////
     //////////////////// v For handling the table v ////////////////////

@@ -43,7 +43,7 @@ function sleep(ms) {
 }
 
 export async function animForcedByChangingTempUnit() {
-  await sleep(100);
+  await sleep(50);
   weatherData.updateWeatherData();
 }
 
