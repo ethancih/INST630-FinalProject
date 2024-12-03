@@ -12,8 +12,6 @@ export async function updateDisplay(tempUnit, place, changingScene, changingTemp
     updateTempUnit(tempUnit);
     updatePlace(place);
 
-    // Import weather data and update the weather display based on the selected unit and place
-    weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     // Update the images with the help of weatherDetermine and call the subsequent animations
     if (changingScene) {
         console.log("Changing scene");
@@ -22,8 +20,12 @@ export async function updateDisplay(tempUnit, place, changingScene, changingTemp
     else if (changingTempUnit) {
         console.log("Changing tempUnit");
         animation.animForcedByChangingTempUnit();
+        // update the weather data based on the selected unit and place
+        weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     }
     else {
+        // update the weather data based on the selected unit and place
+        weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     }
 }
 

@@ -40,7 +40,7 @@ export async function waitForWeather() {
                 clearInterval(interval);
                 resolve(weather);
             }
-        }, 50); // Check every 100ms
+        }, 50); // Check every 50ms
     });
 }
 

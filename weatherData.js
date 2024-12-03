@@ -28,7 +28,6 @@ export async function weatherDataMain(tempUnit, place) {
     ////////////////////////////////////////////////////////////////////
 
     currHour = Math.floor(convertToDecimalHour(fullJson['currentConditions']['datetime']));
-    // console.log("currHour is " + currHour)
 
     function convertToDecimalHour(timeString) {
         const [hour, minute, second] = timeString.split(':').map(Number);
@@ -56,10 +55,6 @@ export async function weatherDataMain(tempUnit, place) {
 }
 
 export function updateWeatherData() {
-    // weatherDataMain().then(() => {
-    //     console.log("updateWeatherData() continues...");
-    // });
-
     document.getElementById("weather").innerHTML = data["weather"];
     document.getElementById("location").innerHTML = data["location"];
     document.getElementById("localTime").innerHTML = data["localTime"];
@@ -109,7 +104,6 @@ async function query(tempUnit, location) {
     console.log("here is fullJson; 0");
     console.log(fullJson);
 
-    // console.log(fullJson['address']);
     return fullJson;
 }
 

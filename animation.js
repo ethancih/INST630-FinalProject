@@ -49,6 +49,8 @@ export async function animForcedByChangingTempUnit() {
 
 export async function transAnimation() {
   disableSelect(true);
+  // update the weather data based on the selected unit and place
+  weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
   const currWeather = await weatherDetermine.waitForWeather();
   console.log("currWeather = " + currWeather);
 
@@ -81,7 +83,6 @@ export async function transAnimation() {
   }
 
   async function updateData() {
-    // weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
     weatherData.updateWeatherData();
   }
 }
