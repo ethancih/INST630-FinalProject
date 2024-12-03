@@ -43,7 +43,7 @@ function sleep(ms) {
 }
 
 export async function animForcedByChangingTempUnit() {
-  await sleep(50);
+  await sleep(100);
   weatherData.updateWeatherData();
 }
 
@@ -52,7 +52,7 @@ export async function transAnimation() {
   // update the weather data based on the selected unit and place
   weatherData.weatherDataMain(tempUnit, place);  // Call with updated parameters
   const currWeather = await weatherDetermine.waitForWeather();
-  console.log("currWeather = " + currWeather);
+  console.log("transAnimation() says currWeather = " + currWeather);
 
   let tl = new TimelineMax();
 
@@ -75,7 +75,8 @@ export async function transAnimation() {
     console.log("updated BG1 to " + backgrounds[currWeather][bgCounter[currWeather]]);
   }
 
-  function updateBG2() {
+  async function updateBG2() {
+    await sleep(50);
     document.getElementById("background2").style.backgroundImage = "url('"+ backgrounds[currWeather][bgCounter[currWeather]] +"')";
     console.log("updated BG2 to " + backgrounds[currWeather][bgCounter[currWeather]]);
     iterateBgCounter(currWeather);
