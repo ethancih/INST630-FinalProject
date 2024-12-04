@@ -39,7 +39,7 @@ body{
     }
     .background1 {
         z-index: -1;
-        height: 100%;
+        height: 100vh;
         width: 100%;
         position: absolute;
         background-image: url("")/* , url("assets/backgrounds/test01.JPG")*/; 
@@ -49,7 +49,7 @@ body{
     }
     .background2 {
         z-index: -1;
-        height: 100%;
+        height: 100vh;
         width: 100%;
         position: absolute;
         background-image: url("")/* , url("assets/backgrounds/test01.JPG")*/; 
