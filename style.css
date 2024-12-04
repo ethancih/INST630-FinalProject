@@ -81,6 +81,7 @@ header {
     padding-left: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
+    display: none;
   }
 
 button {
@@ -92,6 +93,7 @@ button {
     background-color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     border: 0;
+    display: none;
 }
 
 .weatherContainer {
