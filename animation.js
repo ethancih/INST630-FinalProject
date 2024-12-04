@@ -3,10 +3,10 @@ console.log('Loaded animation.js');
 const weatherDetermine = await import("./weatherDetermine.js");
 const weatherData = await import("./weatherData.js");
 
-const backgrounds = [ ["./assets/backgrounds/sunny-01.jpg", "./assets/backgrounds/sunny-02.jpg", "./assets/backgrounds/sunny-03.jpg"],
-                      ["./assets/backgrounds/rainy-02.jpg", "./assets/backgrounds/rainy-03.jpg", "./assets/backgrounds/rainy-04.jpg"], 
-                      ["./assets/backgrounds/cloudy-02.jpg", "./assets/backgrounds/cloudy-03.jpg", "./assets/backgrounds/cloudy-04.jpg"],
-                      ["./assets/backgrounds/snowy-01.jpg", "./assets/backgrounds/snowy-02.jpg", "./assets/backgrounds/snowy-03.jpg"] ];
+const backgrounds = [ ["./assets/backgrounds/sunny-04.jpg", "./assets/backgrounds/sunny-02.jpg", "./assets/backgrounds/sunny-03.jpg"],
+                      ["./assets/backgrounds/rainy-05.jpg", "./assets/backgrounds/rainy-03.jpg", "./assets/backgrounds/rainy-04.jpg"], 
+                      ["./assets/backgrounds/cloudy-05.jpg", "./assets/backgrounds/cloudy-03.jpg", "./assets/backgrounds/cloudy-04.jpg"],
+                      ["./assets/backgrounds/snowy-04.jpg", "./assets/backgrounds/snowy-02.jpg", "./assets/backgrounds/snowy-03.jpg"] ];
 let bgCounter = [0, 0, 0, 0];
 function iterateBgCounter(currWeather) {
   if (bgCounter[currWeather] < 2) {
@@ -30,6 +30,7 @@ export async function defaultAnimation() {
   iterateBgCounter(currWeather);
 
   weatherData.updateWeatherData();
+  document.querySelector(".weatherContainer").style.display = "flex";
   gsap.from(".weatherContainer", 1.8, { x: "100vw", ease: "power4.out", delay: 0 });
   gsap.from(".selectBox", 1.8, { x: "100vw", ease: "power4.out", delay: 0.3 });
   gsap.from("button", 1.8, { x: "100vw", ease: "power4.out", delay: 0.4 });

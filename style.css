@@ -29,8 +29,8 @@ body{
 
     .loadingIcon {
         z-index: -2;
-        height: 20%;
-        width: 20%;
+        width: 288px;
+        height: 162px;
         position: absolute;
         background-image: url("./assets/icons/LoadingIcon.gif");
         background-position: center, center;
@@ -47,7 +47,6 @@ body{
         background-size: cover, cover;
         background-repeat: no-repeat, no-repeat;
     }
-
     .background2 {
         z-index: -1;
         height: 100%;
@@ -101,9 +100,9 @@ button {
     width: 390px;
     height: 236px;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
+    bottom: 0px;
+    right: 0px;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -241,23 +240,11 @@ button {
     }
 }
   
-/* footer {
-    margin-top: auto;
-    
-    padding-top: 1em;
-    padding-bottom: 2em;
-    text-align: center;
-    width: 100%;
-    
-    line-height: 1.5;
-    background-color: grey;
-} */
-  
-  /* Responsive layout - makes a one column layout instead of a two-column layout */
-  /* the following are for desktop view */
-/* @media (min-width: 736px) {
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+/* the following are for desktop view */
+@media (min-width: 410px) {
     .weatherContainer {
-      margin-left: 4em;
-      margin-right: 4em;
+        bottom: 10px;
+        right: 10px;
     }
-} */
+}
