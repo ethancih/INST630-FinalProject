@@ -72,6 +72,8 @@ header {
     position: absolute;
     bottom: 256px;
     right: 180px;
+    color: black;
+    border: none;
 }
 
 .selectBox select {
@@ -82,7 +84,11 @@ header {
     background-color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     display: none;
-  }
+}
+
+.selectBox:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
 
 button {
     position: absolute;
@@ -94,6 +100,14 @@ button {
     cursor: pointer;
     border: 0;
     display: none;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+button:active {
+    background-color: rgb(245, 245, 245);
 }
 
 .weatherContainer {
@@ -125,17 +139,26 @@ button {
         font-family: "STIX Two Text", serif;
         font-weight: bold;
     }
+    .weather:hover {
+        text-shadow: rgb(255, 255, 255) 0 0 8px;
+    }
     .location {
         font-size: 18px;
         font-family: "Asap", sans-serif;
         font-weight: 600;
         margin-top: -7px;;
     }
+    .location:hover {
+        text-shadow: rgb(255, 255, 255) 0 0 5px;
+    }
     .localTime {
         font-size: 12px;
         font-family: "Asap", sans-serif;
         font-weight: normal;
         margin-top: 5px;;
+    }
+    .localTime:hover {
+        text-shadow: rgb(255, 255, 255) 0 0 5px;
     }
 }
 
@@ -166,6 +189,10 @@ button {
             gap: 3px;
         }
     }
+    .weatherColumnWrapper_right_top:hover {
+        text-shadow: rgb(255, 255, 255) 0 0 5px;
+    }
+
     .weatherColumnWrapper_right_bottom {
         display: flex;
         flex-direction: row;
@@ -180,6 +207,9 @@ button {
             margin-top: 6px;
             gap: 3px;
         }
+    }
+    .weatherColumnWrapper_right_bottom:hover {
+        text-shadow: rgb(255, 255, 255) 0 0 5px;
     }
 }
 
