@@ -74,6 +74,7 @@ header {
     right: 180px;
     color: black;
     border: none;
+    font-family: "Asap", sans-serif;
 }
 
 .selectBox select {
@@ -84,6 +85,7 @@ header {
     background-color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     display: none;
+    font-family: "Asap", sans-serif;
 }
 
 .selectBox:hover {
@@ -100,6 +102,7 @@ button {
     cursor: pointer;
     border: 0;
     display: none;
+    font-family: "Asap", sans-serif;
 }
 
 button:hover {
